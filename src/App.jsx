@@ -12,7 +12,7 @@ function App() {
   const [editTitle, setEditTitle] = useState('')
   const [editBody, setEditBody] = useState('')
 
-  // GET запрос - загрузка постов при монтировании компонента
+
   useEffect(() => {
     loadPosts()
   }, [])
@@ -23,7 +23,7 @@ function App() {
     const result = await getPosts()
     
     if (result.success) {
-      // Преобразуем посты в формат для отображения
+
       const formattedPosts = result.data.slice(0, 10).map(post => ({
         id: post.id,
         title: post.title,
@@ -37,7 +37,7 @@ function App() {
     setLoading(false)
   }
 
-  // POST запрос - создание нового поста
+
   const addPost = async () => {
     if (!newPostTitle.trim()) {
       setError('Пожалуйста, введите название поста')
@@ -53,7 +53,7 @@ function App() {
     })
 
     if (result.success) {
-      // Добавляем новый пост в начало списка
+
       const newPost = {
         id: result.data.id,
         title: result.data.title,
@@ -69,7 +69,7 @@ function App() {
     setLoading(false)
   }
 
-  // PUT запрос - обновление поста
+  
   const handleUpdatePost = async () => {
     if (!editTitle.trim()) {
       setError('Пожалуйста, введите название поста')
@@ -104,7 +104,7 @@ function App() {
     setLoading(false)
   }
 
-  // DELETE запрос - удаление поста
+
   const handleDeletePost = async (id) => {
     if (!window.confirm('Вы уверены, что хотите удалить этот пост?')) {
       return
@@ -123,21 +123,21 @@ function App() {
     setLoading(false)
   }
 
-  // Начало редактирования
+
   const startEditing = (post) => {
     setEditingPost(post)
     setEditTitle(post.title)
     setEditBody(post.description)
   }
 
-  // Отмена редактирования
+ 
   const cancelEditing = () => {
     setEditingPost(null)
     setEditTitle('')
     setEditBody('')
   }
 
-  // Переключение статуса выполнения (локальное действие)
+  
   const togglePost = (id) => {
     setPosts(posts.map(post =>
       post.id === id ? { ...post, completed: !post.completed } : post
@@ -155,7 +155,7 @@ function App() {
 
       <main className="main">
         <div className="container">
-          {/* Отображение ошибок */}
+          
           {error && (
             <div className="error-message">
               <span className="error-icon">⚠️</span>
@@ -164,7 +164,7 @@ function App() {
             </div>
           )}
 
-          {/* Индикатор загрузки */}
+          
           {loading && (
             <div className="loading-overlay">
               <div className="spinner"></div>
@@ -172,7 +172,7 @@ function App() {
             </div>
           )}
 
-          {/* Форма добавления нового поста (POST) */}
+          
           <section className="add-lab-section">
             <h2>Добавить новый пост (POST запрос)</h2>
             <div className="form-group">
@@ -203,7 +203,7 @@ function App() {
             </div>
           </section>
 
-          {/* Кнопка обновления списка (GET запрос) */}
+          
           <section className="refresh-section">
             <button 
               onClick={loadPosts} 
@@ -214,7 +214,7 @@ function App() {
             </button>
           </section>
 
-          {/* Список постов */}
+          
           <section className="labs-section">
             <h2>Список постов (загружено через GET запрос)</h2>
             {posts.length === 0 && !loading ? (
@@ -226,7 +226,7 @@ function App() {
                 {posts.map(post => (
                   <div key={post.id} className={`lab-card ${post.completed ? 'completed' : ''}`}>
                     {editingPost?.id === post.id ? (
-                      // Форма редактирования (PUT запрос)
+                      
                       <div className="edit-form">
                         <h3>Редактирование поста (PUT запрос)</h3>
                         <input
@@ -306,7 +306,7 @@ function App() {
             )}
           </section>
 
-          {/* Статистика */}
+          
           <section className="stats-section">
             <div className="stats">
               <div className="stat-card">
@@ -323,39 +323,12 @@ function App() {
               </div>
             </div>
           </section>
-
-          {/* Информация о HTTP методах */}
-          <section className="info-section">
-            <h2>Реализованные HTTP методы</h2>
-            <div className="methods-grid">
-              <div className="method-card">
-                <div className="method-badge get">GET</div>
-                <h3>Получение данных</h3>
-                <p>Загрузка списка постов при монтировании компонента и по кнопке "Обновить"</p>
-              </div>
-              <div className="method-card">
-                <div className="method-badge post">POST</div>
-                <h3>Создание записи</h3>
-                <p>Добавление нового поста через форму вверху страницы</p>
-              </div>
-              <div className="method-card">
-                <div className="method-badge put">PUT</div>
-                <h3>Обновление записи</h3>
-                <p>Полное обновление поста через кнопку редактирования</p>
-              </div>
-              <div className="method-card">
-                <div className="method-badge delete">DELETE</div>
-                <h3>Удаление записи</h3>
-                <p>Удаление поста через кнопку удаления с подтверждением</p>
-              </div>
-            </div>
-          </section>
         </div>
       </main>
 
       <footer className="footer">
         <div className="container">
-          <p>Песочница для лабораторных работ © 2024 | API: JSONPlaceholder</p>
+          <p>Песочница для лабораторных работ © 2026 | API: JSONPlaceholder</p>
         </div>
       </footer>
     </div>
